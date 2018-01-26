@@ -24,7 +24,7 @@ import java.text.NumberFormat;
 
 public class MoveView extends ViewGroup {
     private Paint bgPaint, fePaint;
-    private final int startAngle = 115, endAngle = 310;
+    private final int startAngle = 120, endAngle = 300;
     float borderWidth;
     float progress = 0;
     private PaintFlagsDrawFilter pfd;
@@ -163,7 +163,7 @@ public class MoveView extends ViewGroup {
         // 画半圆
         canvas.setDrawFilter(pfd);
         canvas.drawArc(contentRect, startAngle, endAngle, false, bgPaint);
-        canvas.drawArc(contentRect, startAngle, 100 * p(), false, fePaint);
+        canvas.drawArc(contentRect, startAngle, progress * p(), false, fePaint);
         super.draw(canvas);
     }
 
