@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="theme_sm">#1f2267</color>
+    <color name="theme_sm_dark">#1f2267</color>
+
+    <color name="theme_heart">#e14d3c</color>
+    <color name="theme_heart_dark">#e14d3c</color>
+</resources>

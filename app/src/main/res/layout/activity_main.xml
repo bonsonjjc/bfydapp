@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.bonson.bfydapp.view.index.IndexViewModel" />
+    </data>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/theme"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.bonson.resource.view.MToolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar"
+                android:background="@color/transparent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/ico_refresh"
+                    android:visibility="@{viewModel.type !=3 ? View.VISIBLE : View.GONE}" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/ico_menu" />
+
+                <RadioGroup
+                    android:id="@+id/rg_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_bind"
+                        style="@style/RadioMode"
+                        android:background="@drawable/left_item_bg"
+                        android:checked='@{viewModel.mode!=1}'
+                        android:text="手环模式" />
+
+                    <RadioButton
+                        android:id="@+id/rb_unbind"
+                        style="@style/RadioMode"
+                        android:layout_marginLeft="-1dp"
+                        android:background="@drawable/right_item_bg"
+                        android:checked='@{viewModel.mode==1}'
+                        android:text="app模式" />
+                </RadioGroup>
+            </com.bonson.resource.view.MToolbar>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.bonson.bfydapp.widget.MoveView
+                    android:id="@+id/mv"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/transparent"
+                    app:borderSize="8.5dp"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_history"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/rg_action_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="end|center_vertical"
+                    android:layoutDirection="rtl"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_history"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/rb_yd"
+                        style="@style/RbAction"
+                        android:button="@drawable/yd_item"
+                        android:checked="true"
+                        tools:text="运动"
+                        android:text='@{viewModel.type==1 ? "运动" :""}'
+                        android:textColor="@color/theme" />
+
+                    <RadioButton
+                        android:id="@+id/rb_sm"
+                        style="@style/RbAction"
+                        android:layout_marginTop="10dp"
+                        android:button="@drawable/sm_item"
+                        android:text='@{viewModel.type==2 ? "睡眠" :""}'
+                        android:textColor="@color/theme_sm" />
+
+                    <RadioButton
+                        android:id="@+id/rb_xl"
+                        style="@style/RbAction"
+                        android:layout_marginTop="10dp"
+                        android:button="@drawable/xl_item"
+                        android:text='@{viewModel.type==3 ? "心率" :""}'
+                        android:textColor="@color/theme_heart"
+                        android:visibility="@{viewModel.mode == 1 ? View.GONE :View.VISIBLE}" />
+                </RadioGroup>
+
+                <ImageView
+                    android:id="@+id/btn_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ico_lsjl"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btn_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ico_fx"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/background"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#848484"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rec_tables"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:tables="@{viewModel.tables}" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="#30353b"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="#283842"
+                android:gravity="center"
+                android:text="菜单"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rec_menus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@{@drawable/ico_menu_line}"
+                android:menus="@{viewModel.menus}"
+                app:layoutManager="LinearLayoutManager" />
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
+</layout>
