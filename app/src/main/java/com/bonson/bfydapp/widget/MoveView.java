@@ -180,9 +180,6 @@ public class MoveView extends ViewGroup {
 
     public void moving(String number, String desc, float percent) {
         tvTitle.setText("当前总步数");
-
-        int v = (int) (percent * 100);
-        percent = v / 100;
         tvDesc.setText(desc);
         tvPercentDesc.setText("完成度");
         tvPercent.setText(percent + "%");
@@ -204,12 +201,46 @@ public class MoveView extends ViewGroup {
         }
     }
 
+    public void sleeping(String sleep,String desc,float percent){
+        tvTitle.setText("昨晚共睡眠");
+        tvDesc.setText(desc);
+        tvPercentDesc.setText("完成度");
+        tvPercent.setText(percent + "%");
+
+        if (numberAnimator != null && numberAnimator.isRunning()) {
+            numberAnimator.cancel();
+        }
+        if (percentAnimator != null && percentAnimator.isRunning()) {
+            percentAnimator.cancel();
+        }
+        if (TextUtils.isEmpty(sleep)) {
+            tvNumber.setText("--");
+        } else {
+            numberAnimator = numberAnimator(0, 12000, "stepNumber");
+        }
+        if (percent < 0.009) {
+            tvPercent.setText("0.0%");
+        } else {
+            percentAnimator = numberAnimator(0.0f, percent, "percent");
+        }
+    }
+
+    public void hearting(String heart,String desc){
+        tvDesc.setText(desc);
+        tvPercentDesc.setText("");
+        tvPercent.setText("重新测量");
+    }
+
     public void setStepNumber(int number) {
         tvNumber.setText(String.valueOf(number));
     }
 
     public void setPercent(float percent) {
-        tvPercent.setText(format.format(percent) + "%");
+        if(percent==100){
+            tvPercent.setText(" 100% ");
+        }else{
+            tvPercent.setText(format.format(percent) + "%");
+        }
         progress = percent;
     }
 

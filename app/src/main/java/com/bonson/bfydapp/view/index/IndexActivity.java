@@ -63,12 +63,14 @@ public class IndexActivity extends BaseDaggerActivity<ActivityMainBinding> {
                     binding.getRoot().setBackgroundColor(color(R.color.theme));
                     break;
                 case R.id.rb_sm:
-                    binding.getRoot().setBackgroundColor(color(R.color.theme_sm));
                     viewModel.sleep();
+                    binding.mv.sleeping(1234 + "", "昨晚共睡眠0分钟", 100);
+                    binding.getRoot().setBackgroundColor(color(R.color.theme_sm));
                     break;
                 case R.id.rb_xl:
-                    binding.getRoot().setBackgroundColor(color(R.color.theme_heart));
                     viewModel.heart();
+                    binding.getRoot().setBackgroundColor(color(R.color.theme_heart));
+                    binding.mv.hearting(90 + "", "心率正常");
                     break;
             }
         });
